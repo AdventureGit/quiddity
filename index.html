@@ -39,10 +39,14 @@ body_class: home
     <div class="carousel-track">
       {% for p in recent_photos limit:6 %}
       <figure class="carousel-slide{% if forloop.first %} is-active{% endif %}">
-        <a href="{{ p.url | relative_url }}">
+        <a class="carousel-media" href="{{ p.url | relative_url }}">
           {% if p.image %}<img class="plate" src="{{ p.image | relative_url }}" alt="{{ p.alt | default: p.title }}" loading="lazy">{% else %}<div class="photo-placeholder plate"><span>photograph · {{ p.title }}</span></div>{% endif %}
         </a>
-        <figcaption><span class="cap">{{ p.caption | default: p.title }}</span></figcaption>
+        <figcaption class="carousel-caption">
+          <span class="cap-title">{{ p.title }}</span>
+          {% if p.caption %}<span class="cap">{{ p.caption }}</span>{% endif %}
+          {% if p.place or p.date %}<span class="cap-meta">{% if p.place %}{{ p.place }} · {% endif %}{{ p.date | date: "%B %Y" }}</span>{% endif %}
+        </figcaption>
       </figure>
       {% endfor %}
     </div>
