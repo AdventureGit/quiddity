@@ -94,4 +94,11 @@ Built on the Classical system (`assets/css/classical.css`: Cormorant Garamond + 
 ## Local preview (optional, needs Ruby)
 
     bundle install
-    bundle exec jekyll serve --baseurl /quiddity
+    bundle exec jekyll build --baseurl ""
+    python -m http.server 4500 --directory _site
+
+Then open http://localhost:4500/. (`bundle exec jekyll serve`'s own built-in
+server has a known bug on Windows — it 404s on everything. Building and
+serving the static output with any static file server, like the one used
+above, sidesteps it. `--livereload` isn't available this way, so re-run
+`jekyll build` after each change and refresh the page.)
