@@ -30,7 +30,14 @@
   );
 
   watch('.section-icon', 'is-drawn',
-    function (el) { el.classList.add('icon-ready'); },
+    function (el) {
+      el.classList.add('icon-ready');
+      el.addEventListener('mouseenter', function () {
+        el.classList.remove('is-drawn');
+        void el.getBoundingClientRect(); // force style recalc so the animation restarts (offsetWidth is undefined on SVG)
+        el.classList.add('is-drawn');
+      });
+    },
     { threshold: 0.4 }
   );
 })();

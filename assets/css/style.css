@@ -146,16 +146,20 @@ a.footnote,a.reversefootnote{text-decoration:none}
 .more{font-size:15px;margin-top:18px;display:inline-block}
 .section-icon{display:block;width:25px;height:25px;margin-bottom:11px;color:var(--color-accent);opacity:.9;overflow:visible}
 
-/* Icon animations — pen writes, notepad fills in, camera flashes, on scroll into view */
-.section-icon.icon-ready .icon-draw{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .9s cubic-bezier(.4,0,.2,1)}
-.section-icon.icon-ready .icon-draw-d1{transition-delay:.15s}
-.section-icon.icon-ready .icon-draw-d2{transition-delay:.3s}
-.section-icon.icon-ready .icon-draw-d3{transition-delay:.45s}
-.section-icon.icon-ready.is-drawn .icon-draw{stroke-dashoffset:0}
-.section-icon.icon-ready .icon-pop{transform-box:fill-box;transform-origin:center;opacity:0;transform:scale(0);transition:opacity .3s ease .95s,transform .3s cubic-bezier(.34,1.56,.64,1) .95s}
-.section-icon.icon-ready.is-drawn .icon-pop{opacity:1;transform:scale(1)}
-.icon-camera .icon-flash{opacity:0}
+/* Icon animations — pen writes, notepad fills in, camera flashes, on scroll into view or hover.
+   These are keyframe animations, not transitions, so removing and re-adding .is-drawn (the hover
+   replay in reveal.js) restarts them cleanly instead of reversing a half-finished transition. */
+@keyframes icon-draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes icon-pop{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
 @keyframes icon-flash-burst{0%,100%{opacity:0}40%{opacity:.85}}
+.section-icon.icon-ready .icon-draw{stroke-dasharray:1;stroke-dashoffset:1}
+.section-icon.icon-ready.is-drawn .icon-draw{animation:icon-draw .9s cubic-bezier(.4,0,.2,1) both}
+.section-icon.icon-ready.is-drawn .icon-draw-d1{animation-delay:.15s}
+.section-icon.icon-ready.is-drawn .icon-draw-d2{animation-delay:.3s}
+.section-icon.icon-ready.is-drawn .icon-draw-d3{animation-delay:.45s}
+.section-icon.icon-ready .icon-pop{transform-box:fill-box;transform-origin:center;opacity:0;transform:scale(0)}
+.section-icon.icon-ready.is-drawn .icon-pop{animation:icon-pop .35s cubic-bezier(.34,1.56,.64,1) .95s both}
+.icon-camera .icon-flash{opacity:0}
 .section-icon.icon-ready.is-drawn .icon-flash{animation:icon-flash-burst .8s ease .95s}
 
 /* Spotlight carousel — "Lately seen" */
