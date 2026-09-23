@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiddity — Write</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lora:ital,wght@0,400;0,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/classical.css">
+<link rel="stylesheet" href="/assets/css/style.css">
+<style>
+  body{max-width:640px;margin:0 auto;padding:48px 20px 96px;background:var(--color-bg)}
+  .wordmark{font-size:26px}
+  .lede{margin:6px 0 32px}
+  .seg{width:100%;margin-bottom:28px}
+  .seg-opt{flex:1;justify-content:center}
+  .panel{display:none}
+  .panel.active{display:block}
+  .field{margin-bottom:18px}
+  .field label{display:block;font-size:12px;margin-bottom:5px;color:var(--ink-2)}
+  textarea.input{min-height:220px;font-family:var(--font-body);resize:vertical}
+  .row{display:flex;gap:12px}
+  .row .field{flex:1}
+  .check{display:flex;align-items:center;gap:8px;font-size:14px;margin:22px 0;color:var(--ink-2)}
+  .check input{width:16px;height:16px}
+  #status{margin-top:16px;font-size:14px;min-height:1.4em}
+  #status.ok{color:var(--color-accent-700)}
+  #status.err{color:#a33}
+  .hint{font-size:12px;color:var(--ink-3);margin-top:-10px;margin-bottom:18px}
+</style>
+</head>
+<body>
+  <a class="wordmark" href="#" style="text-decoration:none;color:var(--color-text)">Quiddity</a>
+  <p class="lede">Write something. Add a photo. Publish.</p>
+
+  <form id="form">
+    <div class="seg" role="radiogroup" aria-label="What are you adding?">
+      <label class="seg-opt"><input type="radio" name="type" value="essay" checked> Essay</label>
+      <label class="seg-opt"><input type="radio" name="type" value="note"> Note</label>
+      <label class="seg-opt"><input type="radio" name="type" value="journal"> Journal</label>
+      <label class="seg-opt"><input type="radio" name="type" value="photo"> Photo</label>
+    </div>
+
+    <div class="panel active" data-panel="essay">
+      <div class="field"><label for="e-title">Title</label><input class="input" id="e-title" name="title"></div>
+      <div class="row">
+        <div class="field"><label for="e-desc">Description (optional)</label><input class="input" id="e-desc" name="description"></div>
+        <div class="field"><label for="e-tags">Tags, comma-separated (optional)</label><input class="input" id="e-tags" name="tags" placeholder="attention, identity"></div>
+      </div>
+      <div class="field"><label for="e-body">Essay</label><textarea class="input" id="e-body" name="body" placeholder="Start writing here."></textarea></div>
+    </div>
+
+    <div class="panel" data-panel="note">
+      <div class="field"><label for="n-title">Title (optional)</label><input class="input" id="n-title" name="title"></div>
+      <div class="field"><label for="n-tags">Tags (optional)</label><input class="input" id="n-tags" name="tags"></div>
+      <div class="field"><label for="n-body">Fragment</label><textarea class="input" id="n-body" name="body" placeholder="Start writing here." style="min-height:140px"></textarea></div>
+    </div>
+
+    <div class="panel" data-panel="journal">
+      <div class="field"><label for="j-title">Title (optional)</label><input class="input" id="j-title" name="title"></div>
+      <div class="field"><label for="j-body">Entry</label><textarea class="input" id="j-body" name="body" placeholder="Start writing here." style="min-height:180px"></textarea></div>
+    </div>
+
+    <div class="panel" data-panel="photo">
+      <div class="field"><label for="p-image">Photo</label><input type="file" id="p-image" name="image" accept="image/*"></div>
+      <div class="field"><label for="p-caption">Caption</label><input class="input" id="p-caption" name="caption"></div>
+      <div class="row">
+        <div class="field"><label for="p-place">Place (optional)</label><input class="input" id="p-place" name="place" placeholder="Manila"></div>
+        <div class="field"><label for="p-camera">Camera (optional)</label><input class="input" id="p-camera" name="camera" placeholder="35mm"></div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="p-title">Title (optional)</label><input class="input" id="p-title" name="title" placeholder="Defaults to the caption"></div>
+        <div class="field"><label for="p-alt">Alt text (optional)</label><input class="input" id="p-alt" name="alt" placeholder="Defaults to the caption"></div>
+      </div>
+      <div class="field"><label for="p-body">Longer reflection (optional)</label><textarea class="input" id="p-body" name="body" style="min-height:110px"></textarea></div>
+    </div>
+
+    <label class="check"><input type="checkbox" name="publish" checked> Publish immediately (commit &amp; push)</label>
+    <div class="hint">Uncheck to save the file locally without touching git.</div>
+    <button class="btn btn-primary btn-block" type="submit">Save</button>
+  </form>
+  <p id="status" role="status"></p>
+
+<script src="/admin/app.js"></script>
+</body>
+</html>

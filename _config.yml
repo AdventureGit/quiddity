@@ -43,4 +43,5 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - publish.py
+  - admin
   - vendor

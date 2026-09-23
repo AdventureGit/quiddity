@@ -5,7 +5,17 @@
 Plain Jekyll. No npm, no theme. GitHub Pages builds it on push.
 Live at https://adventuregit.github.io/quiddity/
 
-## Publishing with the script (recommended)
+## Publishing with a form (easiest)
+
+    python publish.py admin
+
+Opens a page in your browser — styled with the site's own fonts and colors
+— with a switch for Essay / Note / Journal / Photo, a field for each thing
+that type needs, and a "Publish immediately" checkbox that commits and
+pushes for you on save. This is a local tool: it only listens on your own
+machine (127.0.0.1) and does nothing when the terminal running it is closed.
+
+## Publishing with the script
 
 `publish.py` writes the front matter for you, so you never have to hand-edit
 YAML or remember the folder layout. Run it from inside this folder:
