@@ -1,0 +1,22 @@
+---
+layout: default
+title: Essays
+permalink: /essays/
+---
+<p class="section-label">essays</p>
+<p class="intro" style="font-size:1rem; margin-bottom:2rem;">Longer, finished thoughts.</p>
+
+{% assign essays = site.posts | where: "category", "essay" %}
+<ul class="entry-list">
+  {% for post in essays %}
+    <li>
+      <h2 class="entry-title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
+      <p class="entry-meta">{{ post.date | date: "%B %-d, %Y" }}</p>
+      {% if post.excerpt and post.excerpt != "" %}
+        <p class="entry-excerpt">{{ post.excerpt | strip_html | truncatewords: 32 }}</p>
+      {% endif %}
+    </li>
+  {% else %}
+    <li>Nothing here yet.</li>
+  {% endfor %}
+</ul>

@@ -1,0 +1,36 @@
+title: Quiddity
+tagline: "on the thoughts that shape our being"
+description: >-
+  Essays, notes, journal entries, and photographs from vent —
+  on attention, identity, beauty in overlooked things, and how the mind works.
+author: vent
+
+# --- GitHub Pages ---
+# If this repo is published as a user/org site (username.github.io), leave baseurl empty.
+# If it's a project site (username.github.io/quiddity), set baseurl: "/quiddity"
+url: ""
+baseurl: ""
+
+markdown: kramdown
+kramdown:
+  input: GFM
+permalink: /:year/:month/:title/
+
+paginate: 0
+
+plugins:
+  - jekyll-feed
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
+  - node_modules

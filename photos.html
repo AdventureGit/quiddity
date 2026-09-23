@@ -1,0 +1,21 @@
+---
+layout: default
+title: Photos
+permalink: /photos/
+---
+<p class="section-label">photos</p>
+<p class="intro" style="font-size:1rem; margin-bottom:2.5rem;">Not a portfolio — just what I noticed and had a camera for.</p>
+
+{% assign photos = site.posts | where: "category", "photo" %}
+{% for post in photos %}
+  <article class="photo-entry">
+    {% if post.image %}
+      <a href="{{ post.url | relative_url }}">
+        <img src="{{ post.image | relative_url }}" alt="{{ post.alt | default: post.title }}">
+      </a>
+    {% endif %}
+    <p class="photo-caption">{{ post.caption | default: post.title }}<span class="photo-date">{{ post.date | date: "%B %-d, %Y" }}</span></p>
+  </article>
+{% else %}
+  <p>Nothing here yet.</p>
+{% endfor %}

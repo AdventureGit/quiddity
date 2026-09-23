@@ -1,0 +1,12 @@
+<header class="site-header">
+  <p class="site-title"><a href="{{ '/' | relative_url }}">Quiddity</a></p>
+  <p class="site-tagline">{{ site.tagline }}</p>
+  <nav class="site-nav">
+    <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>home</a>
+    <a href="{{ '/essays/' | relative_url }}" {% if page.url == '/essays/' %}class="active"{% endif %}>essays</a>
+    <a href="{{ '/notes/' | relative_url }}" {% if page.url == '/notes/' %}class="active"{% endif %}>notes</a>
+    <a href="{{ '/journal/' | relative_url }}" {% if page.url == '/journal/' %}class="active"{% endif %}>journal</a>
+    <a href="{{ '/photos/' | relative_url }}" {% if page.url == '/photos/' %}class="active"{% endif %}>photos</a>
+    <a href="{{ '/about/' | relative_url }}" {% if page.url == '/about/' %}class="active"{% endif %}>about</a>
+  </nav>
+</header>

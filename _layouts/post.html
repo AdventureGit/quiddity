@@ -1,0 +1,35 @@
+---
+layout: default
+---
+{% if page.category == "photo" %}
+  <article class="photo-entry">
+    {% if page.image %}
+      <img src="{{ page.image | relative_url }}" alt="{{ page.alt | default: page.title }}">
+    {% endif %}
+    <p class="photo-caption">{{ page.caption | default: page.title }}<span class="photo-date">{{ page.date | date: "%B %-d, %Y" }}</span></p>
+    <div class="post-content">{{ content }}</div>
+  </article>
+
+{% elsif page.category == "note" %}
+  <article class="note-fragment">
+    <span class="note-date">{{ page.date | date: "%B %-d, %Y" }}</span>
+    {% if page.title %}<h2 class="entry-title" style="font-size:1.1rem;">{{ page.title }}</h2>{% endif %}
+    <div class="note-body post-content">{{ content }}</div>
+  </article>
+
+{% elsif page.category == "journal" %}
+  <article class="journal-entry">
+    <span class="journal-date">{{ page.date | date: "%A, %B %-d, %Y" }}</span>
+    <div class="post-content">{{ content }}</div>
+  </article>
+
+{% else %}
+  <article>
+    <header class="post-header">
+      <p class="section-label">essay</p>
+      <h1 class="post-title">{{ page.title }}</h1>
+      <p class="post-meta">{{ page.date | date: "%B %-d, %Y" }}</p>
+    </header>
+    <div class="post-content">{{ content }}</div>
+  </article>
+{% endif %}
