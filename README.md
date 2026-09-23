@@ -5,7 +5,34 @@
 Plain Jekyll. No npm, no theme. GitHub Pages builds it on push.
 Live at https://adventuregit.github.io/quiddity/
 
-## Publishing
+## Publishing with the script (recommended)
+
+`publish.py` writes the front matter for you, so you never have to hand-edit
+YAML or remember the folder layout. Run it from inside this folder:
+
+    python publish.py essay "On Attention" --tags attention,identity
+    python publish.py note "A short thought"
+    python publish.py note                          (untitled fragment)
+    python publish.py journal
+    python publish.py photo "C:\pics\rain.jpg" "Taft Avenue, after four." --place Manila --camera 35mm
+
+Each of `essay` / `note` / `journal` creates the file and opens it in your
+default editor so you can write the body. When you've saved it:
+
+    python publish.py push
+
+That commits everything pending and pushes — the site rebuilds in a minute
+or two. `photo` doesn't need a separate writing step (the caption is all it
+needs), so add `--publish` to skip straight to committing and pushing:
+
+    python publish.py photo "C:\pics\rain.jpg" "Taft Avenue, after four." --publish
+
+Full option list: `python publish.py --help` or `python publish.py essay --help`.
+
+## Publishing by hand
+
+If you'd rather write the file yourself, the folder decides section, layout
+and URL:
 
 | What | Folder | Filename |
 |---|---|---|
@@ -14,7 +41,7 @@ Live at https://adventuregit.github.io/quiddity/
 | Journal | `_posts/journal/` | `2026-10-01-entry.md` |
 | Photograph | `_photos/` + image in `assets/photos/` | `2026-10-01-title.md` |
 
-The folder decides section, layout and URL. Front matter:
+Front matter:
 
     ---
     title: "On Attention"
@@ -28,7 +55,7 @@ Then:
     git commit -m "new essay"
     git push
 
-## Photographs
+### Photographs
 
     ---
     title: Window sun

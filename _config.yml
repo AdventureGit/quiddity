@@ -42,4 +42,5 @@ exclude:
   - README.md
   - Gemfile
   - Gemfile.lock
+  - publish.py
   - vendor
