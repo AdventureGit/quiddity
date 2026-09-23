@@ -2,14 +2,17 @@
 layout: default
 body_class: home
 ---
-<section class="intro">
-  <h1 class="intro-title">On the thoughts <em>that shape our being.</em></h1>
-  <p>I'm vent. This is where I think slowly, in essays, fragments, and photographs, about attention, identity, and the beauty of things we walk past.</p>
-  <p><a href="{{ '/about/' | relative_url }}">More about this place →</a></p>
-</section>
+<div class="hero">
+  <section class="intro">
+    <h1 class="intro-title">On the thoughts <em>that shape our being.</em></h1>
+    <p>I'm vent. This is where I think slowly, in essays, fragments, and photographs, about attention, identity, and the beauty of things we walk past.</p>
+    <p><a href="{{ '/about/' | relative_url }}">More about this place →</a></p>
+  </section>
+</div>
 
 <div class="home-grid">
   <section>
+    {% include icon.html name="pen" %}
     <h2 class="section-label">Latest writing</h2>
     <ul class="entries">
       {% for post in site.categories.essays limit:5 %}{% include entry-row.html post=post %}{% endfor %}
@@ -18,6 +21,7 @@ body_class: home
   </section>
   <aside>
     <div class="home-block">
+      {% include icon.html name="notepad" %}
       <h2 class="section-label">Notes</h2>
       {% for n in site.categories.notes limit:3 %}
       <div class="note note--mini"><p>{{ n.content | strip_html | truncatewords: 26 }} <a href="{{ n.url | relative_url }}">→</a></p></div>
@@ -26,6 +30,7 @@ body_class: home
     {% assign latest_photo = site.photos | sort: 'date' | reverse | first %}
     {% if latest_photo %}
     <div class="home-block">
+      {% include icon.html name="camera" %}
       <h2 class="section-label">Lately seen</h2>
       <a class="photo-card" href="{{ latest_photo.url | relative_url }}">
         <div class="thumb">{% if latest_photo.image %}<img src="{{ latest_photo.image | relative_url }}" alt="{{ latest_photo.alt | default: latest_photo.title }}" loading="lazy">{% else %}<div class="photo-placeholder"><span>photograph</span></div>{% endif %}</div>

@@ -1,4 +1,8 @@
 <footer class="site-footer">
   <p class="footer-mark">Quiddity — {{ site.tagline }}.</p>
-  <p class="footer-meta">Written by {{ site.author }} in the Philippines · <a href="{{ '/tags/' | relative_url }}">Tags</a></p>
+  <p class="footer-meta">
+    Written by {{ site.author }} in the Philippines · <a href="{{ '/tags/' | relative_url }}">Tags</a>
+    {% comment %} placeholder — swap in the real handle whenever there is one {% endcomment %}
+    · <a href="https://instagram.com/yourhandle" class="footer-social">{% include icon.html name="instagram" %}@yourhandle</a>
+  </p>
 </footer>
