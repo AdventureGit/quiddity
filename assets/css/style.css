@@ -11,6 +11,8 @@
   --measure:35rem;
   --wide:54rem;
   --botanical-opacity:.13;
+  --hero-bg:color-mix(in srgb,#fffdf8 82%,var(--color-bg));
+  --hero-shadow:0 28px 60px -30px color-mix(in srgb,var(--color-text) 30%,transparent),0 4px 18px color-mix(in srgb,var(--color-text) 7%,transparent);
   color-scheme:light;
 }
 [data-theme="dark"]{
@@ -22,6 +24,8 @@
   --link:var(--color-accent-300);
   --link-hover:var(--color-accent-200);
   --botanical-opacity:.09;
+  --hero-bg:color-mix(in srgb,var(--color-surface) 55%,transparent);
+  --hero-shadow:0 28px 60px -30px rgba(0,0,0,.55),0 4px 18px rgba(0,0,0,.25);
   color-scheme:dark;
 }
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:var(--color-bg)}
@@ -121,7 +125,7 @@ a.footnote,a.reversefootnote{text-decoration:none}
 .photo-placeholder span{font:11px ui-monospace,Menlo,monospace;color:var(--ink-3);letter-spacing:.04em}
 
 /* Home */
-.hero{position:relative;margin:0 0 clamp(56px,9vw,96px);padding:clamp(36px,6vw,60px) clamp(24px,5vw,44px);border-radius:var(--radius-lg);border:1px solid var(--color-divider);background:color-mix(in srgb,var(--color-surface) 55%,transparent)}
+.hero{position:relative;margin:0 0 clamp(56px,9vw,96px);padding:clamp(36px,6vw,60px) clamp(24px,5vw,44px);border-radius:var(--radius-lg);border:1px solid var(--color-divider);background:var(--hero-bg);box-shadow:var(--hero-shadow)}
 .intro{max-width:var(--measure);margin-bottom:0}
 .intro-title{font-weight:300;font-size:clamp(46px,30px + 4.4vw,80px);line-height:.98;letter-spacing:-.022em;margin:0 0 22px}
 .intro-title em{font-weight:300;color:var(--color-accent);position:relative;text-decoration:none;cursor:default}
@@ -133,6 +137,26 @@ a.footnote,a.reversefootnote{text-decoration:none}
 .home-block + .home-block{margin-top:52px}
 .more{font-size:15px;margin-top:18px;display:inline-block}
 .section-icon{display:block;width:25px;height:25px;margin-bottom:11px;color:var(--color-accent);opacity:.9}
+
+/* Spotlight carousel — "Lately seen" */
+.spotlight{max-width:600px;margin:0 auto clamp(64px,10vw,104px);text-align:center}
+.spotlight .section-icon{margin-left:auto;margin-right:auto}
+.carousel{position:relative;margin-top:30px}
+.carousel-slide{display:none}
+.carousel-slide.is-active{display:block;animation:carousel-fade .6s ease}
+@keyframes carousel-fade{from{opacity:0}to{opacity:1}}
+.carousel-slide a{display:block}
+.carousel-slide img,.carousel-slide .photo-placeholder{aspect-ratio:4/5;width:100%;object-fit:cover}
+.carousel-slide figcaption{margin-top:16px}
+.carousel-slide .cap{font-size:19px}
+.carousel-btn{position:absolute;top:calc(50% - 22px);width:40px;height:40px;border-radius:50%;background:var(--color-bg);border:1px solid var(--color-divider);display:flex;align-items:center;justify-content:center;font-size:22px;line-height:1;cursor:pointer;color:var(--ink-2);transition:color .3s ease,border-color .3s ease}
+.carousel-btn:hover{color:var(--color-accent);border-color:var(--color-accent)}
+.carousel-prev{left:-14px}
+.carousel-next{right:-14px}
+@media (min-width:760px){.carousel-prev{left:-54px}.carousel-next{right:-54px}}
+.carousel-dots{display:flex;justify-content:center;gap:8px;margin-top:20px}
+.carousel-dot{width:7px;height:7px;border-radius:50%;background:var(--color-divider);border:none;padding:0;cursor:pointer;transition:background-color .3s ease,transform .3s ease}
+.carousel-dot.is-active{background:var(--color-accent);transform:scale(1.3)}
 
 /* Lists */
 .entries{list-style:none;margin:0;padding:0}

@@ -27,16 +27,35 @@ body_class: home
       <div class="note note--mini"><p>{{ n.content | strip_html | truncatewords: 26 }} <a href="{{ n.url | relative_url }}">→</a></p></div>
       {% endfor %}
     </div>
-    {% assign latest_photo = site.photos | sort: 'date' | reverse | first %}
-    {% if latest_photo %}
-    <div class="home-block">
-      {% include icon.html name="camera" %}
-      <h2 class="section-label">Lately seen</h2>
-      <a class="photo-card" href="{{ latest_photo.url | relative_url }}">
-        <div class="thumb">{% if latest_photo.image %}<img src="{{ latest_photo.image | relative_url }}" alt="{{ latest_photo.alt | default: latest_photo.title }}" loading="lazy">{% else %}<div class="photo-placeholder"><span>photograph</span></div>{% endif %}</div>
-        <figcaption><span class="cap">{{ latest_photo.caption | default: latest_photo.title }}</span></figcaption>
-      </a>
-    </div>
-    {% endif %}
   </aside>
 </div>
+
+{% assign recent_photos = site.photos | sort: 'date' | reverse %}
+{% if recent_photos.size > 0 %}
+<section class="spotlight">
+  {% include icon.html name="camera" %}
+  <h2 class="section-label">Lately seen</h2>
+  <div class="carousel" data-carousel>
+    <div class="carousel-track">
+      {% for p in recent_photos limit:6 %}
+      <figure class="carousel-slide{% if forloop.first %} is-active{% endif %}">
+        <a href="{{ p.url | relative_url }}">
+          {% if p.image %}<img class="plate" src="{{ p.image | relative_url }}" alt="{{ p.alt | default: p.title }}" loading="lazy">{% else %}<div class="photo-placeholder plate"><span>photograph · {{ p.title }}</span></div>{% endif %}
+        </a>
+        <figcaption><span class="cap">{{ p.caption | default: p.title }}</span></figcaption>
+      </figure>
+      {% endfor %}
+    </div>
+    {% assign photo_count = recent_photos.size %}
+    {% if photo_count > 6 %}{% assign photo_count = 6 %}{% endif %}
+    {% if photo_count > 1 %}
+    <button class="carousel-btn carousel-prev" type="button" aria-label="Previous photograph">‹</button>
+    <button class="carousel-btn carousel-next" type="button" aria-label="Next photograph">›</button>
+    <div class="carousel-dots">
+      {% for p in recent_photos limit:6 %}<button class="carousel-dot{% if forloop.first %} is-active{% endif %}" type="button" aria-label="Go to photograph {{ forloop.index }}"></button>{% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  <p class="more"><a href="{{ '/photographs/' | relative_url }}">All photographs →</a></p>
+</section>
+{% endif %}
