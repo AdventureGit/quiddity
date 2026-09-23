@@ -6,17 +6,14 @@ description: >-
 author: vent
 
 # --- GitHub Pages ---
-# Project site: served at https://<your-username>.github.io/quiddity/
-# Replace <your-username> below once you know it.
-url: "https://<your-username>.github.io"
+# Project site: served at https://adventuregit.github.io/quiddity/
+url: "https://adventuregit.github.io"
 baseurl: "/quiddity"
 
 markdown: kramdown
 kramdown:
   input: GFM
 permalink: /:year/:month/:title/
-
-paginate: 0
 
 plugins:
   - jekyll-feed
