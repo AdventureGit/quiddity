@@ -1,0 +1,17 @@
+---
+layout: default
+title: Journal
+---
+<header class="post-header">
+  <h1 class="page-title">Journal</h1>
+  <p class="lede">Dated, unedited, mostly for myself.</p>
+</header>
+{% for e in site.categories.journal %}
+<article class="journal-entry">
+  <time class="journal-date" datetime="{{ e.date | date_to_xmlschema }}"><b>{{ e.date | date: "%-d" }}</b>{{ e.date | date: "%b %Y" }}</time>
+  <div>
+    <p>{{ e.content | strip_html | truncatewords: 60 }}</p>
+    <a class="read" href="{{ e.url | relative_url }}">Read the entry</a>
+  </div>
+</article>
+{% endfor %}

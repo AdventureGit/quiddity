@@ -1,0 +1,15 @@
+---
+layout: default
+title: Tags
+permalink: /tags/
+---
+<header class="post-header">
+  <h1 class="page-title">Tags</h1>
+  <p class="lede">Threads that run through the writing.</p>
+</header>
+{% assign tags = site.tags | sort %}
+<p class="tags tags--index">{% for t in tags %}<a class="tag tag-accent" href="#{{ t[0] | slugify }}">{{ t[0] }} · {{ t[1].size }}</a>{% endfor %}</p>
+{% for t in tags %}
+<h2 class="year" id="{{ t[0] | slugify }}">{{ t[0] }}</h2>
+<ul class="entries">{% for post in t[1] %}{% include entry-row.html post=post %}{% endfor %}</ul>
+{% endfor %}

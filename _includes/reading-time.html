@@ -1,0 +1,1 @@
+{% assign words = include.content | strip_html | number_of_words %}{% assign mins = words | divided_by: 220 %}{% if mins < 1 %}{% assign mins = 1 %}{% endif %}{{ mins }} min read

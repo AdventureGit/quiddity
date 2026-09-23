@@ -1,0 +1,9 @@
+{% comment %}
+Usage inside any post:
+{% include figure.html src="/assets/photos/rain.jpg" alt="Rain on a jeepney window" caption="Taft Avenue, after four." meta="Manila · 2026 · 35mm" %}
+Add wide=true to let it break out of the text column.
+{% endcomment %}
+<figure class="figure{% if include.wide %} figure--wide{% endif %}">
+  {% if include.src %}<img class="plate" src="{{ include.src | relative_url }}" alt="{{ include.alt | default: include.caption | strip_html }}" loading="lazy">{% else %}<div class="photo-placeholder plate"><span>photograph</span></div>{% endif %}
+  {% if include.caption or include.meta %}<figcaption>{% if include.caption %}<span class="cap">{{ include.caption | markdownify | remove: '<p>' | remove: '</p>' }}</span>{% endif %}{% if include.meta %}<span class="cap-meta">{{ include.meta }}</span>{% endif %}</figcaption>{% endif %}
+</figure>

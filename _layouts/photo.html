@@ -1,0 +1,17 @@
+---
+layout: default
+---
+<article class="photo-single{% if content.size > 10 %} photo-single--words{% endif %}">
+  <figure class="figure">
+    {% if page.image %}<img class="plate" src="{{ page.image | relative_url }}" alt="{{ page.alt | default: page.title }}">{% else %}<div class="photo-placeholder photo-placeholder--tall plate"><span>photograph · {{ page.title }}</span></div>{% endif %}
+    <figcaption>
+      <span class="cap">{{ page.caption | default: page.title }}</span>
+      <span class="cap-meta">{% if page.place %}{{ page.place }} · {% endif %}{{ page.date | date: "%B %Y" }}{% if page.camera %} · {{ page.camera }}{% endif %}</span>
+    </figcaption>
+  </figure>
+  {% if content.size > 10 %}<div class="prose photo-words">
+    <h1 class="photo-title">{{ page.title }}</h1>
+{{ content }}
+  </div>{% endif %}
+</article>
+<p class="back"><a href="{{ '/photographs/' | relative_url }}">← All photographs</a></p>

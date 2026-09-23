@@ -1,0 +1,17 @@
+---
+layout: default
+title: Notes
+---
+<header class="post-header">
+  <h1 class="page-title">Notes</h1>
+  <p class="lede">Fragments. Things half-thought, kept anyway.</p>
+</header>
+<div class="notes">
+{% for n in site.categories.notes %}
+  <article class="note">
+    {% if n.title and n.show_title %}<h2 class="note-title">{{ n.title }}</h2>{% endif %}
+    <div class="prose">{{ n.content }}</div>
+    <p class="note-meta"><time datetime="{{ n.date | date_to_xmlschema }}">{{ n.date | date: "%b %-d, %Y" }}</time><a href="{{ n.url | relative_url }}">permalink</a></p>
+  </article>
+{% endfor %}
+</div>

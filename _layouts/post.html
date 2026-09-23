@@ -1,35 +1,23 @@
 ---
 layout: default
 ---
-{% if page.category == "photo" %}
-  <article class="photo-entry">
-    {% if page.image %}
-      <img src="{{ page.image | relative_url }}" alt="{{ page.alt | default: page.title }}">
-    {% endif %}
-    <p class="photo-caption">{{ page.caption | default: page.title }}<span class="photo-date">{{ page.date | date: "%B %-d, %Y" }}</span></p>
-    <div class="post-content">{{ content }}</div>
-  </article>
-
-{% elsif page.category == "note" %}
-  <article class="note-fragment">
-    <span class="note-date">{{ page.date | date: "%B %-d, %Y" }}</span>
-    {% if page.title %}<h2 class="entry-title" style="font-size:1.1rem;">{{ page.title }}</h2>{% endif %}
-    <div class="note-body post-content">{{ content }}</div>
-  </article>
-
-{% elsif page.category == "journal" %}
-  <article class="journal-entry">
-    <span class="journal-date">{{ page.date | date: "%A, %B %-d, %Y" }}</span>
-    <div class="post-content">{{ content }}</div>
-  </article>
-
-{% else %}
-  <article>
-    <header class="post-header">
-      <p class="section-label">essay</p>
+{% assign cat = page.categories | first %}
+<article class="post post--{{ cat }}">
+  <header class="post-header">
+    <p class="kicker"><a href="{{ '/' | append: cat | append: '/' | relative_url }}">{% if cat == 'essays' %}Essay{% elsif cat == 'notes' %}Note{% else %}Journal{% endif %}</a></p>
+    {% if cat == 'journal' %}
+      <h1 class="post-title"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%A, %B %-d, %Y" }}</time></h1>
+      {% if page.title and page.title != page.slug %}<p class="post-sub">{{ page.title }}</p>{% endif %}
+    {% else %}
       <h1 class="post-title">{{ page.title }}</h1>
-      <p class="post-meta">{{ page.date | date: "%B %-d, %Y" }}</p>
-    </header>
-    <div class="post-content">{{ content }}</div>
-  </article>
-{% endif %}
+      {% if page.description %}<p class="post-sub">{{ page.description }}</p>{% endif %}
+      <p class="post-meta"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>{% if cat == 'essays' %} · {% include reading-time.html content=content %}{% endif %}</p>
+    {% endif %}
+  </header>
+  {% if page.image %}{% include figure.html src=page.image caption=page.image_caption meta=page.image_meta wide=true %}{% endif %}
+  <div class="prose">
+{{ content }}
+  </div>
+  {% if page.tags.size > 0 %}<p class="tags">{% for t in page.tags %}<a class="tag tag-accent" href="{{ '/tags/' | relative_url }}#{{ t | slugify }}">{{ t }}</a>{% endfor %}</p>{% endif %}
+  <p class="fin" aria-hidden="true">❦</p>
+</article>

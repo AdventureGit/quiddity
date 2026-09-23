@@ -1,62 +1,60 @@
 # Quiddity
 
-vent's personal site — essays, notes, a journal, and photographs. Built with
-plain Jekyll (no theme, no build tooling) for GitHub Pages.
+*on the thoughts that shape our being*
+
+Plain Jekyll. No npm, no theme. GitHub Pages builds it on push.
+Live at https://adventuregit.github.io/quiddity/
 
 ## Publishing
 
-Everything lives in `_posts/`. One folder, one workflow: add a file, commit,
-push. The `category` in the front matter decides where it shows up.
+| What | Folder | Filename |
+|---|---|---|
+| Essay | `_posts/essays/` | `2026-10-01-on-attention.md` |
+| Note | `_posts/notes/` | `2026-10-01-anything.md` |
+| Journal | `_posts/journal/` | `2026-10-01-entry.md` |
+| Photograph | `_photos/` + image in `assets/photos/` | `2026-10-01-title.md` |
 
-**Essay** (`category: essay`) — shows on the Essays page and the home feed.
+The folder decides section, layout and URL. Front matter:
 
-```yaml
----
-title: "Essay Title"
-category: essay
-date: 2026-09-23
-excerpt: "One-sentence teaser."
----
-```
+    ---
+    title: "On Attention"
+    description: "Optional one-liner under the title"
+    tags: [attention, identity]
+    ---
 
-**Note** (`category: note`) — a short fragment. Title is optional.
+Then:
 
-```yaml
----
-category: note
-date: 2026-09-23
----
-```
+    git add .
+    git commit -m "new essay"
+    git push
 
-**Journal** (`category: journal`) — dated, raw, no title.
+## Photographs
 
-```yaml
----
-category: journal
-date: 2026-09-23
----
-```
+    ---
+    title: Window sun
+    date: 2026-09-14
+    image: /assets/photos/window-sun.jpg
+    alt: A small sun drawn on a fogged jeepney window
+    caption: Someone drew a sun on the fogged glass. It lasted two stops.
+    place: Quezon City
+    camera: 35mm
+    ---
 
-**Photo** (`category: photo`) — put the image in `assets/photos/` first.
+    Optional longer reflection. It sits beside the photograph on wide screens.
 
-```yaml
----
-category: photo
-date: 2026-09-23
-title: "Photo title"
-image: /assets/photos/your-file.jpg
-alt: "Short description for screen readers"
-caption: "What you want under the photo."
----
-```
+Resize to ~2000px on the long edge before committing. Photos inside a post:
 
-Filenames still need the `_posts` convention: `YYYY-MM-DD-anything.md`.
+    {% include figure.html src="/assets/photos/rain.jpg" caption="Taft Avenue, after four." meta="Manila · 2026 · 35mm" %}
 
-## Preview locally (optional)
+## Background drawing
 
-```bash
-bundle install
-bundle exec jekyll serve
-```
+Scan a botanical line drawing (dark ink on white), save as `assets/img/botanical.png`, and uncomment `botanical:` in `_config.yml`. It sits faintly in the corner and inverts in dark mode.
 
-Then open http://localhost:4000.
+## Design
+
+Built on the Classical system (`assets/css/classical.css`: Cormorant Garamond + Lora, gold accent, hairline rules, matted photo plates). Site layer and cream/dark themes live in `assets/css/style.css`.
+
+## Local preview (optional, needs Ruby)
+
+    bundle install
+    bundle exec jekyll serve --baseurl /quiddity

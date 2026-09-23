@@ -1,0 +1,7 @@
+<li class="entry">
+  <a class="entry-link" href="{{ include.post.url | relative_url }}">
+    <span class="entry-title">{{ include.post.title }}</span>
+    <time class="entry-date" datetime="{{ include.post.date | date_to_xmlschema }}">{{ include.post.date | date: "%b %-d, %Y" }}</time>
+  </a>
+  {% if include.post.description %}<p class="entry-desc">{{ include.post.description }}</p>{% endif %}
+</li>

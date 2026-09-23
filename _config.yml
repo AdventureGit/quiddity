@@ -1,33 +1,45 @@
 title: Quiddity
-tagline: "on the thoughts that shape our being"
-description: >-
-  Essays, notes, journal entries, and photographs from vent —
-  on attention, identity, beauty in overlooked things, and how the mind works.
+tagline: on the thoughts that shape our being
 author: vent
+description: Essays, notes, a journal, and photographs by vent — on attention, identity, and beauty in overlooked things.
+lang: en
 
-# --- GitHub Pages ---
-# Project site: served at https://adventuregit.github.io/quiddity/
 url: "https://adventuregit.github.io"
 baseurl: "/quiddity"
+
+# Background drawing. Scan a botanical line drawing (dark ink on white),
+# save it as assets/img/botanical.png, then uncomment this line.
+# botanical: /assets/img/botanical.png
 
 markdown: kramdown
 kramdown:
   input: GFM
-permalink: /:year/:month/:title/
+  smart_quotes: ["lsquo", "rsquo", "ldquo", "rdquo"]
 
-plugins:
-  - jekyll-feed
+timezone: Asia/Manila
+
+collections:
+  photos:
+    output: true
+    permalink: /photographs/:name/
 
 defaults:
-  - scope:
-      path: ""
-      type: posts
-    values:
-      layout: post
+  # This site-wide fallback must come FIRST: Jekyll applies `defaults` entries
+  # in order and later matches override earlier ones, so a catch-all listed
+  # last would clobber the more specific layouts below.
+  - scope: { path: "" }
+    values: { layout: default }
+  - scope: { path: "_posts/essays" }
+    values: { layout: post, category: essays, permalink: "/essays/:title/" }
+  - scope: { path: "_posts/notes" }
+    values: { layout: post, category: notes, permalink: "/notes/:title/" }
+  - scope: { path: "_posts/journal" }
+    values: { layout: post, category: journal, permalink: "/journal/:year/:month/:day/" }
+  - scope: { path: "", type: photos }
+    values: { layout: photo }
 
 exclude:
+  - README.md
   - Gemfile
   - Gemfile.lock
-  - README.md
   - vendor
-  - node_modules

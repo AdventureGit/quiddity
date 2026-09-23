@@ -1,12 +1,15 @@
 <header class="site-header">
-  <p class="site-title"><a href="{{ '/' | relative_url }}">Quiddity</a></p>
-  <p class="site-tagline">{{ site.tagline }}</p>
-  <nav class="site-nav">
-    <a href="{{ '/' | relative_url }}" {% if page.url == '/' %}class="active"{% endif %}>home</a>
-    <a href="{{ '/essays/' | relative_url }}" {% if page.url == '/essays/' %}class="active"{% endif %}>essays</a>
-    <a href="{{ '/notes/' | relative_url }}" {% if page.url == '/notes/' %}class="active"{% endif %}>notes</a>
-    <a href="{{ '/journal/' | relative_url }}" {% if page.url == '/journal/' %}class="active"{% endif %}>journal</a>
-    <a href="{{ '/photos/' | relative_url }}" {% if page.url == '/photos/' %}class="active"{% endif %}>photos</a>
-    <a href="{{ '/about/' | relative_url }}" {% if page.url == '/about/' %}class="active"{% endif %}>about</a>
+  <a class="wordmark" href="{{ '/' | relative_url }}">Quiddity</a>
+  <nav class="site-nav" aria-label="Sections">
+    {% assign here = page.url %}
+    <a href="{{ '/essays/' | relative_url }}"{% if here contains '/essays' %} aria-current="page"{% endif %}>Essays</a>
+    <a href="{{ '/notes/' | relative_url }}"{% if here contains '/notes' %} aria-current="page"{% endif %}>Notes</a>
+    <a href="{{ '/journal/' | relative_url }}"{% if here contains '/journal' %} aria-current="page"{% endif %}>Journal</a>
+    <a href="{{ '/photographs/' | relative_url }}"{% if here contains '/photographs' %} aria-current="page"{% endif %}>Photographs</a>
+    <a href="{{ '/about/' | relative_url }}"{% if here contains '/about' %} aria-current="page"{% endif %}>About</a>
+    <button class="btn btn-ghost btn-icon theme-toggle" type="button" aria-label="Toggle dark mode" onclick="(function(){var d=document.documentElement,t=d.dataset.theme==='dark'?'light':'dark';d.dataset.theme=t;try{localStorage.setItem('quiddity-theme',t)}catch(e){}})()">
+      <svg class="i-moon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      <svg class="i-sun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-2.93 1.41-1.41m11.32-11.32 1.41-1.41M2 12h2M20 12h2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41"/></svg>
+    </button>
   </nav>
 </header>

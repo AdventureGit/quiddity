@@ -1,34 +1,25 @@
 ---
-layout: default
+layout: page
 title: About
 permalink: /about/
+body_class: about
 ---
-<p class="section-label">about</p>
 
-# vent
+I'm vent — lowercase, on purpose. I studied Information Technology in the Philippines, spent most of it on AI and machine learning, and came out of it more curious about how minds work than how models do.
 
-I write about attention — how little of it we actually pay, and what
-happens on the rare occasions we pay enough. About identity, which I don't
-think is a thing you find so much as a thing you keep making. About beauty
-in the overlooked: a chord voicing, a turn of phrase, the particular quiet
-of a room after everyone's left it. About creativity, and about how the
-mind works, mostly because I trained it to build other minds for a living
-and it left me with more questions than I started with.
+*Quiddity* is an old word for the whatness of a thing: the quality that makes it itself and not something else. This site is my attempt to notice that in people, in ideas, in ordinary afternoons.
 
-I studied Information Technology with a focus on AI/ML, which means I spend
-my days thinking in systems, and this site is where I think in everything
-else.
+I write about attention, identity, creativity, and the beauty in overlooked things. Essays are the finished thoughts. Notes are the unfinished ones. The journal is where I think out loud. The photographs are what I saw on the days I was paying attention.
 
-A few fixed points, in case they help explain the rest: **Bill Evans**,
-for the way restraint can say more than the note you didn't play.
-**Bossa nova**, for the same reason, sung. **Dostoevsky**, because he never
-let a character get away with pretending they were simpler than they are.
-**Ecclesiastes**, because it got there first — *vanity of vanities* — and
-somehow that's not where the comfort runs out.
+## Company I keep
 
-This isn't a portfolio. There's nothing to hire here. It's essays when a
-thought is finished, notes when it isn't, a journal for the raw material,
-and photographs for what I couldn't say in words. If any of it is useful
-to you too, I'm glad.
+<ul class="influences">
+  <li>Bill Evans <span>space between the notes</span></li>
+  <li>Bossa nova <span>restraint, warmth, saudade</span></li>
+  <li>Dostoevsky <span>the mind arguing with itself</span></li>
+  <li>Ecclesiastes <span>vanity, and still, the sun</span></li>
+</ul>
 
-— vent
+## Elsewhere
+
+I build things in Python, C#, and Java. The code for this site is [on GitHub](https://github.com/AdventureGit/quiddity). If something here stayed with you, I'd like to hear about it.
