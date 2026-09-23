@@ -6,10 +6,10 @@ description: >-
 author: vent
 
 # --- GitHub Pages ---
-# If this repo is published as a user/org site (username.github.io), leave baseurl empty.
-# If it's a project site (username.github.io/quiddity), set baseurl: "/quiddity"
-url: ""
-baseurl: ""
+# Project site: served at https://<your-username>.github.io/quiddity/
+# Replace <your-username> below once you know it.
+url: "https://<your-username>.github.io"
+baseurl: "/quiddity"
 
 markdown: kramdown
 kramdown:
