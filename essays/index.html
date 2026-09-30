@@ -4,7 +4,7 @@ title: Essays
 ---
 <header class="post-header">
   <h1 class="page-title">Essays</h1>
-  <p class="lede">Longer pieces, written slowly and revised often.</p>
+  {% if site.data.content.ledes.essays != "" %}<p class="lede">{{ site.data.content.ledes.essays | escape }}</p>{% endif %}
 </header>
 {% assign by_year = site.categories.essays | group_by_exp: "p", "p.date | date: '%Y'" %}
 {% for y in by_year %}

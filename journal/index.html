@@ -4,7 +4,7 @@ title: Journal
 ---
 <header class="post-header">
   <h1 class="page-title">Journal</h1>
-  <p class="lede">Dated, unedited, mostly for myself.</p>
+  {% if site.data.content.ledes.journal != "" %}<p class="lede">{{ site.data.content.ledes.journal | escape }}</p>{% endif %}
 </header>
 {% for e in site.categories.journal %}
 <article class="journal-entry">

@@ -5,15 +5,32 @@
 Plain Jekyll. No npm, no theme. GitHub Pages builds it on push.
 Live at https://adventuregit.github.io/quiddity/
 
-## Publishing with a form (easiest)
+## The editor (easiest)
 
-    python publish.py admin
+    cd "C:\Users\jongv\Documents\quiddity" && python publish.py admin
 
-Opens a page in your browser — styled with the site's own fonts and colors
-— with a switch for Essay / Note / Journal / Photo, a field for each thing
-that type needs, and a "Publish immediately" checkbox that commits and
-pushes for you on save. This is a local tool: it only listens on your own
-machine (127.0.0.1) and does nothing when the terminal running it is closed.
+Opens http://127.0.0.1:8971/ in your browser. Three tabs:
+
+- **Write** — new essays, notes, journal entries, and photos.
+- **Manage** — everything already on the site, with Edit and Delete.
+- **Site** — the home page headline and intro, each section's subtitle, the
+  About page, the footer tagline, the site description, and the Instagram handle.
+
+The box at the top always says whether anything is waiting to be published,
+with a **Publish now** button. "Publish automatically after each change" is
+on by default. If publishing fails (no internet, GitHub login, Git setup), the
+reason is shown there — your work is still saved on this computer.
+
+It's a local tool: it only listens on this machine and stops when you close
+its terminal. Design (colors, fonts, layout) still lives in the code.
+
+One-time setup, if publishing says Git doesn't know who you are:
+
+    git config --global user.name "vent"
+    git config --global user.email "the-email-on-your-github-account"
+
+Writing tip: pressing Enter once starts a new line (good for poems); a blank
+line starts a new paragraph.
 
 ## Publishing with the script
 

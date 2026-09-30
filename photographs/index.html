@@ -4,7 +4,7 @@ title: Photographs
 ---
 <header class="post-header">
   <h1 class="page-title">Photographs</h1>
-  <p class="lede">What I saw when I was paying attention.</p>
+  {% if site.data.content.ledes.photographs != "" %}<p class="lede">{{ site.data.content.ledes.photographs | escape }}</p>{% endif %}
 </header>
 <div class="photos">
 {% assign photos = site.photos | sort: 'date' | reverse %}

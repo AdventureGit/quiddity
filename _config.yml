@@ -14,6 +14,7 @@ baseurl: "/quiddity"
 markdown: kramdown
 kramdown:
   input: GFM
+  hard_wrap: true   # a single Enter is a line break (poems keep their lines); a blank line is a new paragraph
   smart_quotes: ["lsquo", "rsquo", "ldquo", "rdquo"]
 
 timezone: Asia/Manila

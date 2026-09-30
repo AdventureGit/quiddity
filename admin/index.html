@@ -3,84 +3,199 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Quiddity — Write</title>
+<title>Quiddity — Editor</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Lora:ital,wght@0,400;0,500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/classical.css">
 <link rel="stylesheet" href="/assets/css/style.css">
 <style>
-  body{max-width:640px;margin:0 auto;padding:48px 20px 96px;background:var(--color-bg)}
+  .admin{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:40px 20px 96px}
   .wordmark{font-size:26px}
-  .lede{margin:6px 0 32px}
-  .seg{width:100%;margin-bottom:28px}
+  .lede{margin:6px 0 24px;font-size:20px}
+  .seg{width:100%;margin-bottom:24px;background:var(--color-bg)}
   .seg-opt{flex:1;justify-content:center}
-  .panel{display:none}
-  .panel.active{display:block}
   .field{margin-bottom:18px}
   .field label{display:block;font-size:12px;margin-bottom:5px;color:var(--ink-2)}
-  textarea.input{min-height:220px;font-family:var(--font-body);resize:vertical}
+  .input{background:var(--color-bg)}
+  textarea.input{min-height:220px;font-family:var(--font-body);font-size:15px;line-height:1.6;resize:vertical}
   .row{display:flex;gap:12px}
-  .row .field{flex:1}
-  .check{display:flex;align-items:center;gap:8px;font-size:14px;margin:22px 0;color:var(--ink-2)}
-  .check input{width:16px;height:16px}
-  #status{margin-top:16px;font-size:14px;min-height:1.4em}
-  #status.ok{color:var(--color-accent-700)}
-  #status.err{color:#a33}
-  .hint{font-size:12px;color:var(--ink-3);margin-top:-10px;margin-bottom:18px}
+  .row .field{flex:1;min-width:0}
+  @media (max-width:560px){.row{flex-direction:column;gap:0}}
+  .hint{font-size:12px;color:var(--ink-3);margin:-10px 0 18px}
+  .check{display:flex;align-items:center;gap:8px;font-size:14px;color:var(--ink-2);cursor:pointer}
+  .check input{width:16px;height:16px;accent-color:var(--color-accent)}
+
+  .status{border:1px solid var(--color-divider);border-radius:var(--radius-md);padding:14px 16px;margin-bottom:24px;background:var(--hero-bg)}
+  .status-main{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .status-text{font-size:15px}
+  .status.is-clean .status-text::before{content:"● ";color:#6f8a55}
+  .status.is-dirty .status-text::before{content:"● ";color:var(--color-accent)}
+  .pending{margin:8px 0 0;padding-left:18px;font:12px ui-monospace,Menlo,Consolas,monospace;color:var(--ink-3)}
+  .status .check{margin-top:10px}
+  .warn{margin-top:12px;padding:10px 12px;border-left:2px solid #a33;background:color-mix(in srgb,#a33 6%,transparent);font-size:13px;white-space:pre-wrap}
+
+  #message{min-height:1.4em;font-size:14px;margin:0 0 18px;white-space:pre-wrap}
+  #message.ok{color:var(--color-accent-700)}
+  #message.err{color:#a33}
+
+  .panel{display:none}
+  .panel.active{display:block}
+  .edit-banner{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;margin-bottom:20px;border-radius:var(--radius-md);background:var(--color-accent-100);font-size:14px}
+  .actions{display:flex;gap:10px;margin-top:22px}
+  .actions .btn-primary{flex:1}
+  .danger{color:#a33 !important}
+  .danger:hover{background:color-mix(in srgb,#a33 10%,transparent) !important}
+
+  .items{list-style:none;margin:0;padding:0}
+  .item{display:flex;align-items:center;gap:14px;padding:14px 0;border-top:1px solid var(--color-divider)}
+  .item:last-child{border-bottom:1px solid var(--color-divider)}
+  .item-thumb{width:44px;height:55px;flex:none;object-fit:cover;border-radius:2px;background:var(--color-surface)}
+  .item-main{flex:1;min-width:0}
+  .item-top{display:flex;gap:10px;align-items:center;font-size:12px;color:var(--ink-3)}
+  .item-title{font-family:var(--font-heading);font-size:20px;line-height:1.25;margin-top:2px;overflow-wrap:anywhere}
+  .item-excerpt{font-size:13px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .item-actions{display:flex;gap:6px;flex:none}
+  .item-empty{padding:20px 0;color:var(--ink-3)}
+  fieldset{border:0;padding:0;margin:0 0 28px}
+  legend{font-family:var(--font-heading);font-size:22px;margin-bottom:12px;padding:0}
+  .view[hidden]{display:none}
 </style>
 </head>
 <body>
+<div class="admin">
   <a class="wordmark" href="#" style="text-decoration:none;color:var(--color-text)">Quiddity</a>
-  <p class="lede">Write something. Add a photo. Publish.</p>
+  <p class="lede">Write, edit, and publish — all from here.</p>
 
-  <form id="form">
-    <div class="seg" role="radiogroup" aria-label="What are you adding?">
+  <div class="status" id="status">
+    <div class="status-main">
+      <span class="status-text" id="status-text">Checking…</span>
+      <button class="btn btn-primary" id="publish-now" type="button" hidden>Publish now</button>
+    </div>
+    <ul class="pending" id="pending-list"></ul>
+    <div class="warn" id="identity-warning" hidden></div>
+    <label class="check"><input type="checkbox" id="auto-publish" checked> Publish automatically after each change</label>
+  </div>
+
+  <p id="message" role="status"></p>
+
+  <div class="seg" role="radiogroup" aria-label="Section">
+    <label class="seg-opt"><input type="radio" name="tab" value="write" checked> Write</label>
+    <label class="seg-opt"><input type="radio" name="tab" value="manage"> Manage</label>
+    <label class="seg-opt"><input type="radio" name="tab" value="site"> Site</label>
+  </div>
+
+  <!-- WRITE -------------------------------------------------------------->
+  <section class="view" data-view="write">
+    <div class="edit-banner" id="edit-banner" hidden>
+      <span>Editing <strong id="edit-title"></strong></span>
+      <button type="button" class="btn btn-ghost" id="cancel-edit">Stop editing</button>
+    </div>
+
+    <div class="seg" id="type-switch" role="radiogroup" aria-label="What are you adding?">
       <label class="seg-opt"><input type="radio" name="type" value="essay" checked> Essay</label>
       <label class="seg-opt"><input type="radio" name="type" value="note"> Note</label>
       <label class="seg-opt"><input type="radio" name="type" value="journal"> Journal</label>
       <label class="seg-opt"><input type="radio" name="type" value="photo"> Photo</label>
     </div>
 
-    <div class="panel active" data-panel="essay">
-      <div class="field"><label for="e-title">Title</label><input class="input" id="e-title" name="title"></div>
-      <div class="row">
-        <div class="field"><label for="e-desc">Description (optional)</label><input class="input" id="e-desc" name="description"></div>
-        <div class="field"><label for="e-tags">Tags, comma-separated (optional)</label><input class="input" id="e-tags" name="tags" placeholder="attention, identity"></div>
+    <form id="form" novalidate>
+      <div class="panel active" data-panel="essay">
+        <div class="field"><label for="e-title">Title</label><input class="input" id="e-title" name="title"></div>
+        <div class="row">
+          <div class="field"><label for="e-desc">Subtitle (optional)</label><input class="input" id="e-desc" name="description"></div>
+          <div class="field"><label for="e-tags">Tags, comma-separated (optional)</label><input class="input" id="e-tags" name="tags" placeholder="attention, identity"></div>
+        </div>
+        <div class="field"><label for="e-body">Essay</label><textarea class="input" id="e-body" name="body" placeholder="Start writing here." style="min-height:360px"></textarea></div>
       </div>
-      <div class="field"><label for="e-body">Essay</label><textarea class="input" id="e-body" name="body" placeholder="Start writing here."></textarea></div>
-    </div>
 
-    <div class="panel" data-panel="note">
-      <div class="field"><label for="n-title">Title (optional)</label><input class="input" id="n-title" name="title"></div>
-      <div class="field"><label for="n-tags">Tags (optional)</label><input class="input" id="n-tags" name="tags"></div>
-      <div class="field"><label for="n-body">Fragment</label><textarea class="input" id="n-body" name="body" placeholder="Start writing here." style="min-height:140px"></textarea></div>
-    </div>
-
-    <div class="panel" data-panel="journal">
-      <div class="field"><label for="j-title">Title (optional)</label><input class="input" id="j-title" name="title"></div>
-      <div class="field"><label for="j-body">Entry</label><textarea class="input" id="j-body" name="body" placeholder="Start writing here." style="min-height:180px"></textarea></div>
-    </div>
-
-    <div class="panel" data-panel="photo">
-      <div class="field"><label for="p-image">Photo</label><input type="file" id="p-image" name="image" accept="image/*"></div>
-      <div class="field"><label for="p-caption">Caption</label><input class="input" id="p-caption" name="caption"></div>
-      <div class="row">
-        <div class="field"><label for="p-place">Place (optional)</label><input class="input" id="p-place" name="place" placeholder="Manila"></div>
-        <div class="field"><label for="p-camera">Camera (optional)</label><input class="input" id="p-camera" name="camera" placeholder="35mm"></div>
+      <div class="panel" data-panel="note">
+        <div class="row">
+          <div class="field"><label for="n-title">Title (optional)</label><input class="input" id="n-title" name="title"></div>
+          <div class="field"><label for="n-tags">Tags (optional)</label><input class="input" id="n-tags" name="tags" placeholder="poetry"></div>
+        </div>
+        <div class="field"><label for="n-body">Fragment</label><textarea class="input" id="n-body" name="body" placeholder="Start writing here."></textarea></div>
       </div>
-      <div class="row">
-        <div class="field"><label for="p-title">Title (optional)</label><input class="input" id="p-title" name="title" placeholder="Defaults to the caption"></div>
-        <div class="field"><label for="p-alt">Alt text (optional)</label><input class="input" id="p-alt" name="alt" placeholder="Defaults to the caption"></div>
-      </div>
-      <div class="field"><label for="p-body">Longer reflection (optional)</label><textarea class="input" id="p-body" name="body" style="min-height:110px"></textarea></div>
-    </div>
 
-    <label class="check"><input type="checkbox" name="publish" checked> Publish immediately (commit &amp; push)</label>
-    <div class="hint">Uncheck to save the file locally without touching git.</div>
-    <button class="btn btn-primary btn-block" type="submit">Save</button>
-  </form>
-  <p id="status" role="status"></p>
+      <div class="panel" data-panel="journal">
+        <div class="field"><label for="j-title">Title (optional)</label><input class="input" id="j-title" name="title"></div>
+        <div class="field"><label for="j-body">Entry</label><textarea class="input" id="j-body" name="body" placeholder="Start writing here." style="min-height:280px"></textarea></div>
+      </div>
+
+      <div class="panel" data-panel="photo">
+        <div class="field"><label for="p-image">Photo</label><input type="file" id="p-image" accept="image/*"></div>
+        <p class="hint" id="photo-current" hidden></p>
+        <div class="field"><label for="p-caption">Caption</label><input class="input" id="p-caption" name="caption"></div>
+        <div class="row">
+          <div class="field"><label for="p-title">Title (optional)</label><input class="input" id="p-title" name="title" placeholder="Defaults to the caption"></div>
+          <div class="field"><label for="p-alt">Description for screen readers (optional)</label><input class="input" id="p-alt" name="alt" placeholder="Defaults to the caption"></div>
+        </div>
+        <div class="row">
+          <div class="field"><label for="p-place">Place (optional)</label><input class="input" id="p-place" name="place" placeholder="Manila"></div>
+          <div class="field"><label for="p-camera">Camera (optional)</label><input class="input" id="p-camera" name="camera" placeholder="35mm"></div>
+        </div>
+        <div class="field"><label for="p-body">Longer reflection (optional)</label><textarea class="input" id="p-body" name="body" style="min-height:120px"></textarea></div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-primary" type="submit" id="save-btn">Save</button>
+        <button class="btn btn-secondary danger" type="button" id="delete-btn" hidden>Delete</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- MANAGE ------------------------------------------------------------->
+  <section class="view" data-view="manage" hidden>
+    <div class="seg" role="radiogroup" aria-label="Show">
+      <label class="seg-opt"><input type="radio" name="filter" value="all" checked> All</label>
+      <label class="seg-opt"><input type="radio" name="filter" value="essay"> Essays</label>
+      <label class="seg-opt"><input type="radio" name="filter" value="note"> Notes</label>
+      <label class="seg-opt"><input type="radio" name="filter" value="journal"> Journal</label>
+      <label class="seg-opt"><input type="radio" name="filter" value="photo"> Photos</label>
+    </div>
+    <ul class="items" id="items"><li class="item-empty">Loading…</li></ul>
+  </section>
+
+  <!-- SITE --------------------------------------------------------------->
+  <section class="view" data-view="site" hidden>
+    <form id="site-form" novalidate>
+      <fieldset>
+        <legend>Home page</legend>
+        <div class="row">
+          <div class="field"><label for="s-home-title">Headline</label><input class="input" id="s-home-title" name="home_title"></div>
+          <div class="field"><label for="s-home-em">Headline, gold italic part</label><input class="input" id="s-home-em" name="home_title_em"></div>
+        </div>
+        <div class="field"><label for="s-home-intro">Introduction</label><textarea class="input" id="s-home-intro" name="home_intro" style="min-height:110px"></textarea></div>
+        <p class="hint">Markdown works here: *italic*, **bold**, [a link](https://example.com). A blank line starts a new paragraph.</p>
+      </fieldset>
+
+      <fieldset>
+        <legend>Section subtitles</legend>
+        <div class="field"><label for="s-l-essays">Essays</label><input class="input" id="s-l-essays" name="lede_essays"></div>
+        <div class="field"><label for="s-l-notes">Notes</label><input class="input" id="s-l-notes" name="lede_notes"></div>
+        <div class="field"><label for="s-l-journal">Journal</label><input class="input" id="s-l-journal" name="lede_journal"></div>
+        <div class="field"><label for="s-l-photos">Photographs</label><input class="input" id="s-l-photos" name="lede_photographs"></div>
+        <div class="field"><label for="s-l-tags">Tags</label><input class="input" id="s-l-tags" name="lede_tags"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>About page</legend>
+        <div class="field"><label for="s-about-title">Title</label><input class="input" id="s-about-title" name="about_title"></div>
+        <div class="field"><label for="s-about-body">Page text</label><textarea class="input" id="s-about-body" name="about_body" style="min-height:380px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px"></textarea></div>
+        <p class="hint">Markdown, plus a little HTML for the “Company I keep” list — edit the text between the tags and leave the tags alone.</p>
+      </fieldset>
+
+      <fieldset>
+        <legend>Across the site</legend>
+        <div class="field"><label for="s-tagline">Tagline (shown in the footer)</label><input class="input" id="s-tagline" name="tagline"></div>
+        <div class="field"><label for="s-desc">Description (shown by search engines and link previews)</label><input class="input" id="s-desc" name="description"></div>
+        <div class="field"><label for="s-ig">Instagram handle (leave empty to hide it)</label><input class="input" id="s-ig" name="instagram" placeholder="yourhandle"></div>
+      </fieldset>
+
+      <div class="actions"><button class="btn btn-primary" type="submit" id="site-save">Save site text</button></div>
+    </form>
+  </section>
+</div>
 
 <script src="/admin/app.js"></script>
 </body>
