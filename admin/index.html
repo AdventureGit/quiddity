@@ -59,7 +59,8 @@
   .item-empty{padding:20px 0;color:var(--ink-3)}
   fieldset{border:0;padding:0;margin:0 0 28px}
   legend{font-family:var(--font-heading);font-size:22px;margin-bottom:12px;padding:0}
-  .view[hidden]{display:none}
+  /* .btn, .seg and .edit-banner set their own display, which would otherwise beat the hidden attribute */
+  [hidden]{display:none !important}
 </style>
 </head>
 <body>
