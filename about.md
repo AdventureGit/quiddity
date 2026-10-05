@@ -15,7 +15,8 @@ I write about attention, identity, creativity, and the beauty in overlooked thin
   <li>Writing <span>expressing thoughts into something tangible</span></li>
   <li>Reading <span>currently reading: little women</span></li>
   <li>Music <span>music as an expression of feeling</span></li>
-  <li>Photography <span>noticing what is unnoticed</span></li>
+  <li>Photography <span>noticing what goes unnoticed</span></li>
+  <li>Running <span>constantly improving pace and endurance</span></li>
 </ul>
 
 ## Elsewhere
