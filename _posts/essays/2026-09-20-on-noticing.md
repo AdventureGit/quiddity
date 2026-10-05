@@ -69,7 +69,7 @@ Habit erodes it. Anything constant eventually becomes invisible. This is the mec
 
 Capturing can replace it. This one I'm still guilty of. Taking a photograph can quietly stand in for looking. The camera takes over the job of remembering, and the mind, relieved of the task, doesn't bother. The photo exists. The noticing didn't happen.
 
-<h2>What it says about you</h2<
+<h2>What it says about you</h2>
 
 Here's where it lands for me.
 
