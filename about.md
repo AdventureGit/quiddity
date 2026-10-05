@@ -11,7 +11,7 @@ I write about attention, identity, creativity, and the beauty in overlooked thin
 
 ## Interests
 
-<ul class="interests">
+<ul class="influences">
   <li>Writing <span>expressing thoughts into something tangible</span></li>
   <li>Reading <span>currently reading: little women</span></li>
   <li>Music <span>music as an expression of feeling</span></li>
