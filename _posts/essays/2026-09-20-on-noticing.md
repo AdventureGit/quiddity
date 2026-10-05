@@ -9,7 +9,7 @@ That bothered me a little, in a way I couldn't explain at the time. Of everythin
 
 I've been circling the question since, and it's turned into a broader one. What makes something worth noticing?
 
-Seeing is not noticing
+<h2>Seeing is not noticing</h2>
 
 Start with a distinction that sounds obvious and isn't.
 
@@ -19,7 +19,7 @@ Noticing is something you do. It means stepping out of autopilot and giving some
 
 Most of life is seen. Very little of it is noticed. And I think the gap between those two verbs is where a lot of what we call presence actually lives.
 
-Two filters
+<h2>Two filters</h2>
 
 So what gets through? I've come to think there are two filters, and something has to pass both.
 
@@ -35,7 +35,7 @@ Surprise makes something catchable. Care makes it keepable.
 
 That's what the Vancouver air was doing. It broke a prediction I didn't know I'd made — I had built an entire picture of that city out of images, and images carry no smell. And it landed on something I cared about more than I'd admitted to myself, which was the question of whether I could belong somewhere that wasn't where I was born.
 
-Being caught, and choosing to stay
+<h2>Being caught, and choosing to stay</h2>
 
 There's a second thing hidden inside noticing that I kept missing: it happens in two moments, not one.
 
@@ -45,7 +45,7 @@ The second is staying. That one is entirely a choice. You can let the moment sli
 
 Almost everyone gets caught constantly. Almost nobody stays. And I've come to think the staying is where the whole value of noticing lives, because the staying is the only part you control.
 
-What the staying does to you
+<h2>What the staying does to you</h2>
 
 Here's what I was wrong about at the start. I assumed the value was in the thing — that some objects and moments are inherently worth attention, and noticing is just the act of correctly identifying them.
 
@@ -59,7 +59,7 @@ It also compounds. Every real act of attention makes the next one slightly more 
 
 And pointed at a person, it stops being private. Simone Weil called attention the rarest and purest form of generosity, and I think that's exactly right. Most people move through whole days without anyone truly registering them. Being noticed — not evaluated, just received — is one of the few things we can give each other for free that can't be faked.
 
-What makes it hard
+<h2>What makes it hard</h2>
 
 Three things work against all of this, and they're worth naming because they're mostly invisible.
 
@@ -69,7 +69,7 @@ Habit erodes it. Anything constant eventually becomes invisible. This is the mec
 
 Capturing can replace it. This one I'm still guilty of. Taking a photograph can quietly stand in for looking. The camera takes over the job of remembering, and the mind, relieved of the task, doesn't bother. The photo exists. The noticing didn't happen.
 
-What it says about you
+<h2>What it says about you</h2<
 
 Here's where it lands for me.
 
@@ -81,4 +81,4 @@ Which means attention isn't only a way of experiencing the world. It's evidence.
 
 Including yourself. Especially yourself.
 
-This started as a journal entry and became an argument through a long conversation. The two-filter idea came out of that back-and-forth; I'd only had half of it on my own.
+<i>This started as a journal entry and became an argument through a long conversation. The two-filter idea came out of that back-and-forth; I'd only had half of it on my own.</i>
