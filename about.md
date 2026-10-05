@@ -9,13 +9,13 @@ body_class: about
 
 I write about attention, identity, creativity, and the beauty in overlooked things. Essays are the finished thoughts. Notes are the unfinished ones. The journal is where I think out loud. The photographs are what I saw on the days I was paying attention.
 
-## Company I keep
+## Interests
 
-<ul class="influences">
-  <li>Bill Evans <span>space between the notes</span></li>
-  <li>Bossa nova <span>restraint, warmth, saudade</span></li>
-  <li>Dostoevsky <span>the mind arguing with itself</span></li>
-  <li>Ecclesiastes <span>vanity, and still, the sun</span></li>
+<ul class="interests">
+  <li>Writing <span>expressing thoughts into something tangible</span></li>
+  <li>Reading <span>currently reading: little women</span></li>
+  <li>Music <span>music as an expression of feeling</span></li>
+  <li>Photography <span>noticing what is unnoticed</span></li>
 </ul>
 
 ## Elsewhere
